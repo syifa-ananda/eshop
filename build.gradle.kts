@@ -54,7 +54,7 @@ tasks.register<Test>("unitTest") {
 }
 
 tasks.register<Test>("functionalTest") {
-	desciption = "Runs functional tests."
+	description = "Runs functional tests."
 	group = "verification"
 
 	filter {
