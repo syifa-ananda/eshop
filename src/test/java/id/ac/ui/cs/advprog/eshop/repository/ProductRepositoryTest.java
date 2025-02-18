@@ -132,4 +132,65 @@ class ProductRepositoryTest {
         Product result = productRepository.update(updatedProduct.getProductId(), updatedProduct);
         assertNull(result);
     }
+
+    @Test
+    void testCreateProductWithNullId() {
+        Product product = new Product();
+        product.setProductName("Null ID Product");
+        product.setProductQuantity(10);
+
+        Product createdProduct = productRepository.create(product);
+
+        assertNotNull(createdProduct.getProductId());
+        assertFalse(createdProduct.getProductId().isEmpty());
+        assertEquals("Null ID Product", createdProduct.getProductName());
+        assertEquals(10, createdProduct.getProductQuantity());
+    }
+
+    @Test
+    void testCreateProductWithEmptyId() {
+        Product product = new Product();
+        product.setProductId("");
+        product.setProductName("Empty ID Product");
+        product.setProductQuantity(5);
+
+        Product createdProduct = productRepository.create(product);
+
+        assertNotNull(createdProduct.getProductId());
+        assertFalse(createdProduct.getProductId().isEmpty());
+        assertEquals("Empty ID Product", createdProduct.getProductName());
+        assertEquals(5, createdProduct.getProductQuantity());
+    }
+
+    @Test
+    void testUpdateExistingProductInSecondIteration() {
+        // Create first product
+        Product product1 = new Product();
+        product1.setProductId("p1");
+        product1.setProductName("First Product");
+        product1.setProductQuantity(5);
+        productRepository.create(product1);
+
+        // Create second product
+        Product product2 = new Product();
+        product2.setProductId("p2");
+        product2.setProductName("Second Product");
+        product2.setProductQuantity(10);
+        productRepository.create(product2);
+
+        // Prepare the updated product for the second one
+        Product updatedProduct2 = new Product();
+        updatedProduct2.setProductId("p2");
+        updatedProduct2.setProductName("Second Product Updated");
+        updatedProduct2.setProductQuantity(20);
+
+        // Update the second product
+        Product result = productRepository.update("p2", updatedProduct2);
+
+        // Verify it updated correctly
+        assertNotNull(result);
+        assertEquals("p2", result.getProductId());
+        assertEquals("Second Product Updated", result.getProductName());
+        assertEquals(20, result.getProductQuantity());
+    }
 }
