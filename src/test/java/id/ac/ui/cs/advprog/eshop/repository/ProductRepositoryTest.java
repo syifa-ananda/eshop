@@ -19,6 +19,9 @@ class ProductRepositoryTest {
 
     @BeforeEach
     void setUp() {
+        // This setup method is intentionally left empty.
+        // No additional initialization is required for these tests at this time.
+        // If future tests require custom setup logic, it can be added here.
     }
 
     @Test
