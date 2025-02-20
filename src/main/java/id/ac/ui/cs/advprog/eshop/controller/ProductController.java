@@ -15,8 +15,13 @@ public class ProductController {
 
     private static final String REDIRECT_PRODUCT_LIST = "redirect:/product/list";
 
+    // Use constructor injection instead of field injection
+    private final ProductService service;
+
     @Autowired
-    private ProductService service;
+    public ProductController(ProductService service) {
+        this.service = service;
+    }
 
     @GetMapping("/create")
     public String createProductPage(Model model) {
