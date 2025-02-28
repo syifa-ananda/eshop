@@ -16,7 +16,9 @@ public abstract class InMemoryRepository<T> implements BaseRepository<T, String>
 
     @Override
     public T create(T entity) {
-        if (getId(entity) == null) {
+        String id = getId(entity);
+        // Check for both null and empty string
+        if (id == null || id.isEmpty()) {
             setId(entity, UUID.randomUUID().toString());
         }
         data.add(entity);
