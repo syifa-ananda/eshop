@@ -15,6 +15,9 @@ public class CarController {
 
     private final CarService carService;
 
+    // Define the constant for the redirect
+    private static final String REDIRECT_LIST_CAR = "redirect:listCar";
+
     @Autowired
     public CarController(CarService carService) {
         this.carService = carService;
@@ -30,7 +33,8 @@ public class CarController {
     @PostMapping("/createCar")
     public String createCarPost(@ModelAttribute Car car) {
         carService.create(car);
-        return "redirect:listCar";
+        // Use the constant instead of the string literal
+        return REDIRECT_LIST_CAR;
     }
 
     @GetMapping("/listCar")
@@ -50,12 +54,14 @@ public class CarController {
     @PostMapping("/editCar")
     public String editCarPost(@ModelAttribute Car car) {
         carService.update(car.getCarId(), car);
-        return "redirect:listCar";
+        // Use the constant again
+        return REDIRECT_LIST_CAR;
     }
 
     @PostMapping("/deleteCar")
     public String deleteCar(@RequestParam("carId") String carId) {
         carService.deleteCarById(carId);
-        return "redirect:listCar";
+        // Use the constant again
+        return REDIRECT_LIST_CAR;
     }
 }
