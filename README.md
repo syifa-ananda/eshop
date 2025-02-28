@@ -88,6 +88,77 @@ secure
 
 </details>
 
+<details>
+<summary>Module 3</summary>
+
+## Reflection
+
+1) Explain what principles you apply to your project!
+
+**Single Responsibility Principle (SRP):**
+
+To apply SRP, I made sure that each file in the project is responsible for one clear aspect of the application. For 
+instance, my repository files, such as ```CarRepository.java``` and ```ProductRepository.java``` are focused on 
+data persistence (CRUD operations) for their respective models. The service files like ```CarServiceImpl.java``` and 
+```ProductServiceImpl.java``` handle the business logic and delegate data access to the repositories, while the controller 
+files are only in charge of handling HTTP requests and responses. This separation makes it easier to understand and maintain 
+each part of the application without one file doing too much.
+
+**Dependency Inversion Principle (DIP):**
+
+I applied DIP by ensuring that my service classes depend on abstractions rather than concrete classes. 
+This was achieved by defining repository interfaces (such as ``CarRepositoryInterface.java``) which are then implemented by 
+the concrete classes like ```CarRepository.java```. In my service files (```CarServiceImpl.java``` and ```ProductServiceImpl.java```), 
+I use constructor injection to receive these interfaces instead of directly instantiating the repositories. This approach 
+not only separate my application layers but also makes it easy to swap out or mock these dependencies during testing.
+
+**Open-Closed Principle (OCP):**  
+
+My project follows the Open-Closed Principle by making it easy to add new features without changing the existing. 
+I built a generic abstract repository (called `InMemoryRepository`) that handles the common CRUD operations. For each 
+specific type of entity, like a Car or a Product, I simply extend this generic repository and only add the code that is 
+unique to that entity.
+
+2) Explain the advantages of applying SOLID principles to your project with examples.
+
+- Easier Maintenance:
+
+Each file or class does just one job. For example, one file handles data access, another handles business rules, and 
+another deals with user requests. This means if something goes wrong, I can quickly find and fix the specific part.
+
+- Better Testability:
+
+By using interfaces for my services, I can swap real parts of my code with fake ones (mocks) when testing. 
+This lets me check if my business rules work correctly without needing to rely on a real database.
+
+- Improved Flexibility and Extensibility:
+
+This code is designed to let me add new features without changing existing code. For instance, I can create a new 
+file for a new type of entity (like a Car or a Product) by extending a generic repository, which minimizes the risk 
+of breaking what already works.
+
+3) Explain the disadvantages of not applying SOLID principles to your project with examples.
+
+- Harder Maintenance:
+
+Without the SRP, files or classes might handle too many tasks. For example, if one 
+file manages both data access and business logic, fixing a bug can be confusing because the issue might be hidden among 
+many responsibilities.
+
+- Difficult Testing:
+
+Without using DIP, the code becomes tightly linked to specific implementations. 
+This makes it harder to test because it can’t easily replace real parts with simple test versions (mocks). For instance, 
+if my service directly creates a database connection, testing the business logic independently becomes challenging.
+
+- Limited Flexibility:
+
+Not following the OCP means that every time I add a new feature or change a behavior, I 
+need to modify existing code. For example, adding a new type of entity might require changes throughout my repository 
+and service layers, increasing the risk of introducing new bugs.
+
+</details>
+
 
 
 
