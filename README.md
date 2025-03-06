@@ -159,6 +159,43 @@ and service layers, increasing the risk of introducing new bugs.
 
 </details>
 
+<details>
+<summary>Module 4</summary>
+
+## Reflection
+
+### 1. TDD Flow
+
+Applying TDD has been highly beneficial for clarifying requirements and shaping the code design, as each test-driven iteration forced 
+me to define precise behaviors before implementing them. However, reflecting on Percival’s self-reflective questions, I see that while 
+the tests confirm main functionality, I need to expand coverage for edge cases and error scenarios, and ensure my tests remain concise 
+and maintainable. Next time, I will add boundary condition tests, improve naming, and maintain strict independence 
+between tests to detect potential issues more effectively.
+
+### 2. F.I.R.S.T. Principles
+
+- **Fast**
+
+The tests run quickly because they use in-memory data and mocks, avoiding slower external services.
+
+- **Independent**
+
+Each test sets up its own data, so they don't affect one another (for example, using ```@BeforeEach``` to reset the state)
+
+- **Repeatable** 
+
+With every test having its own fresh setup, running the tests multiple times will yield the same results.
+
+- **Self-Validating** 
+
+Tests include clear assertions that automatically determine if they pass or fail, so there is no need for manual checks. 
+
+- **Timely** 
+
+Writing tests before or alongside the code ensures they help guide design decisions early on.
+
+</details>
+
 
 
 
