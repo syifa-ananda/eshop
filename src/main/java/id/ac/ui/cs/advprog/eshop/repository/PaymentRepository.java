@@ -2,14 +2,13 @@ package id.ac.ui.cs.advprog.eshop.repository;
 
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PaymentRepository {
 
-    private Map<String, Payment> paymentStore = new HashMap<>();
-
+    private Map<String, Payment> paymentStore = new LinkedHashMap<>();
     public Payment save(Payment payment) {
         paymentStore.put(payment.getId(), payment);
         return payment;
